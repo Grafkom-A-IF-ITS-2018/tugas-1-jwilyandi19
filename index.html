@@ -145,7 +145,7 @@
         gl.bindBuffer(gl.ARRAY_BUFFER, SColorBuffer)
         colors = [];
         for (var i=0; i < 20; i++) {
-            colors = colors.concat([0, 0, 1.0 , 1.0]);
+            colors = colors.concat([0, 0, 1.0, 1.0]);
         }
         gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(colors), gl.STATIC_DRAW)
         SColorBuffer.itemSize = 4
@@ -154,24 +154,36 @@
         NPositionBuffer = gl.createBuffer()
         gl.bindBuffer(gl.ARRAY_BUFFER, NPositionBuffer)
         vertices = [
-          1.0,  1.0,  0.0,
-          -1.0, 1.0,  0.0,
-          1.0,  -1.0, 0.0,
-          -1.0, -1.0, 0.0
+          -0.5, -1, 0,
+          -1, -1, 0,
+          -0.5, 1, 0,
+          -1, 1, 0,
+
+          -0.5, 0.5, 0,
+          0.5, -1, 0,
+          -0.5, 1, 0,
+          0.5, -0.5, 0,
+
+          1, -1, 0,
+          0.5, -1, 0,
+          1, 1, 0,
+          0.5, 1, 0,
+
+
         ]
         gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(vertices), gl.STATIC_DRAW)
         NPositionBuffer.itemSize = 3
-        NPositionBuffer.numItems = 4
+        NPositionBuffer.numItems = 12
         // Square Color
         NColorBuffer = gl.createBuffer();
         gl.bindBuffer(gl.ARRAY_BUFFER, NColorBuffer);
         colors = [];
-        for (var i=0; i < 4; i++) {
+        for (var i=0; i < 12; i++) {
             colors = colors.concat([0.5, 0.5, 1.0, 1.0]);
         }
         gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(colors), gl.STATIC_DRAW);
         NColorBuffer.itemSize = 4;
-        NColorBuffer.numItems = 4;
+        NColorBuffer.numItems = 12;
       }
       var rS = 0
       var rN = 0
