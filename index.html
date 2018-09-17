@@ -108,28 +108,48 @@
       var NPositionBuffer
       var NColorBuffer
       function initBuffers() {
-        // Triangle Position
+        // S Position
         SPositionBuffer = gl.createBuffer()
         gl.bindBuffer(gl.ARRAY_BUFFER, SPositionBuffer)
         var vertices = [
-          0.0,  1.0,  0.0,
-          -1.0, -1.0, 0.0,
-          1.0,  -1.0, 0.0
+        -1, 1, 0,
+        1, 1, 0,
+        -1, 0.6, 0,
+        1, 0.6, 0,
+
+        -1, 0.6, 0,
+        -0.5, 0.6, 0,
+        -1, 0.2, 0,
+        -0.5, 0.2, 0,
+
+        -1, 0.2, 0,
+        1, 0.2, 0,
+        -1, -0.2, 0,
+        1, -0.2, 0,
+
+        0.5, -0.2, 0,
+        1, -0.2, 0,
+        0.5, -0.6, 0,
+        1, -0.6, 0,
+
+        -1, -0.6, 0,
+        1, -0.6, 0,
+        -1, -1, 0,
+        1, -1, 0,
         ]
         gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(vertices), gl.STATIC_DRAW)
         SPositionBuffer.itemSize = 3
-        SPositionBuffer.numItems = 3
+        SPositionBuffer.numItems = 20
         // Triangle Color
         SColorBuffer = gl.createBuffer()
         gl.bindBuffer(gl.ARRAY_BUFFER, SColorBuffer)
-        var colors = [
-          1.0, 0.0, 0.0, 1.0,
-          0.0, 1.0, 0.0, 1.0,
-          0.0, 0.0, 1.0, 1.0
-        ]
+        colors = [];
+        for (var i=0; i < 20; i++) {
+            colors = colors.concat([0, 0, 1.0 , 1.0]);
+        }
         gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(colors), gl.STATIC_DRAW)
         SColorBuffer.itemSize = 4
-        SColorBuffer.numItems = 3
+        SColorBuffer.numItems = 20
         // Square Position
         NPositionBuffer = gl.createBuffer()
         gl.bindBuffer(gl.ARRAY_BUFFER, NPositionBuffer)
@@ -169,9 +189,9 @@
         gl.bindBuffer(gl.ARRAY_BUFFER, SColorBuffer)
         gl.vertexAttribPointer(shaderProgram.vertexColorAttribute, SColorBuffer.itemSize, gl.FLOAT, false, 0, 0)
         setMatrixUniforms()
-        gl.drawArrays(gl.TRIANGLES, 0, SPositionBuffer.numItems)
+        gl.drawArrays(gl.TRIANGLE_STRIP, 0, SPositionBuffer.numItems)
         mvPopMatrix()
-        mat4.translate(mvMatrix, mvMatrix, [0.0, -2.5, 0.0])
+        mat4.translate(mvMatrix, mvMatrix, [0.0, -3.0, 0.0])
         mvPushMatrix()
         mat4.rotate(mvMatrix, mvMatrix, glMatrix.toRadian(rN), [0.0, 1.0, 0.0])
         //mat4.rotateX(mvMatrix, mvMatrix, glMatrix.toRadian(rN))
